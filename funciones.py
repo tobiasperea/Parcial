@@ -36,7 +36,7 @@ def parse_csv(nombre_archivo:str) -> list:
 
 
 
-def normalizar_id (lista_elementos:list):
+def normalizar_id (lista_elementos:list)->bool:
     """Esta funcion convierte en entero las id de la lista anterior"""
     datos_modificados = False
     for proyectos in lista_elementos:
@@ -48,7 +48,7 @@ def normalizar_id (lista_elementos:list):
     return datos_modificados
 
 
-def normalizar_presupuesto(lista_elementos:list):
+def normalizar_presupuesto(lista_elementos:list)->bool:
     """Esta funcion convierte en Entero los presupuestos"""
     datos_modificados: False
     for proyecto in lista_elementos:
@@ -138,7 +138,11 @@ def ingresar_fecha():
         try:
             dia = int(input("Ingrese el día: "))
             mes = int(input("Ingrese el mes: "))
-            anio = int(input("Ingrese el año: "))
+            anio = int(input("Ingrese el año (2010-2040): "))
+
+            if anio < 2010 or anio > 2040:
+                print("Error: El año debe estar entre 2010 y 2040.")
+                continue
 
             fecha = datetime(anio, mes, dia)
             return fecha
